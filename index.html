@@ -23,21 +23,23 @@
 
 <div id="posts"></div>
 
-<script>
-let data = localStorage.getItem("post");
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-if (data) {
-  let post = JSON.parse(data);
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "civicor-3b61a",
+    storageBucket: "civicor-3b61a.firebasestorage.app",
+    messagingSenderId: "253401914785",
+    appId: "1:253401914785:web:4e050ad74a81e50f373fe0"
+  };
 
-  document.getElementById("posts").innerHTML = `
-    <div class="post">
-      <h3>${post.title}</h3>
-      <p>${post.content}</p>
-    </div>
-  `;
-} else {
-  document.getElementById("posts").innerHTML = "<p>No posts yet</p>";
-}
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
 </script>
 
 </body>
