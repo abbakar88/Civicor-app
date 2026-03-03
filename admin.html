@@ -30,18 +30,14 @@
 </head>
 <body>
 
-<div class="box">
-  <h2>Admin Post Panel</h2>
+<h2>Admin Post Panel</h2>
 
-  <input type="text" id="title" placeholder="Post Title">
-  <textarea id="content" placeholder="Write something..."></textarea>
-
-  <form>
-  <input type="text" id="title" placeholder="Title" />
-  <textarea id="content" placeholder="Content"></textarea>
+<form>
+  <input type="text" id="title" placeholder="Post Title" required />
+  <textarea id="content" placeholder="Write something..." required></textarea>
   <button type="submit">Post</button>
-  </form>
-</div>
+</form>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -69,8 +65,8 @@ form.addEventListener("submit", async (e) => {
   const content = document.getElementById("content").value;
 
   await addDoc(collection(db, "posts"), {
-    title: title,
-    content: content,
+    title,
+    content,
     createdAt: new Date()
   });
 
@@ -79,7 +75,6 @@ form.addEventListener("submit", async (e) => {
 });
 
 </script>
-
 
 </body>
 </html>
