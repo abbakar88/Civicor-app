@@ -36,29 +36,46 @@
   <input type="text" id="title" placeholder="Post Title">
   <textarea id="content" placeholder="Write something..."></textarea>
 
-  <button onclick="addPost()">Post</button>
+  <button type="submit">Post</button>
 </div>
+<script type="module">
 
-<script>
-function addPost(){
-  let title = document.getElementById("title").value;
-  let content = document.getElementById("content").value;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  if(title === "" || content === ""){
-    alert("Fill everything");
-    return;
-  }
+const firebaseConfig = {
+  apiKey: "AIzaSyBgnkyCRMLUq_ciI5jC4JOSPXMDWaJn1x0",
+  authDomain: "civicor-3b61a.firebaseapp.com",
+  projectId: "civicor-3b61a",
+  storageBucket: "civicor-3b61a.firebasestorage.app",
+  messagingSenderId: "253401914785",
+  appId: "1:253401914785:web:4e050ad74a81e50f373fe0"
+};
 
-  let post = {
-    title:title,
-    content:content
-  };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  localStorage.setItem("post", JSON.stringify(post));
+const form = document.querySelector("form");
 
-  alert("Posted Successfully!");
-}
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const content = document.getElementById("content").value;
+
+  await addDoc(collection(db, "posts"), {
+    title: title,
+    content: content,
+    createdAt: new Date()
+  });
+
+  alert("Post added successfully!");
+  form.reset();
+});
+
 </script>
+
 
 </body>
 </html>
