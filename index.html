@@ -26,7 +26,7 @@
 <script>
 let data = localStorage.getItem("post");
 
-if(data){
+if (data) {
   let post = JSON.parse(data);
 
   document.getElementById("posts").innerHTML = `
@@ -35,8 +35,8 @@ if(data){
       <p>${post.content}</p>
     </div>
   `;
-}else{
-  document.getElementById("posts").innerHTML = "<p>No post yet</p>";
+} else {
+  document.getElementById("posts").innerHTML = "<p>No posts yet</p>";
 }
 </script>
 
